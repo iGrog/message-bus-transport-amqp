@@ -7,3 +7,6 @@ jobs:
   check:
     uses: thesis-php/.github/.github/workflows/check.yml@main
     secrets: inherit
+    with:
+      php_versions: '["8.4"]'
+      infection: false
