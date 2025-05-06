@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8ee9980752c03db9fed838addfe0b17c",
+    "content-hash": "e447196e4b265b01d9e8955b1b1f5842",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1354,16 +1354,16 @@
         },
         {
             "name": "thesis/amqp",
-            "version": "0.3.1",
+            "version": "0.3.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thesis-php/amqp.git",
-                "reference": "657ee28afa6d5c614eaea890abc5ebbe473f8703"
+                "reference": "169dfa6971de27ca8b1d08f482a1882d16f58c2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thesis-php/amqp/zipball/657ee28afa6d5c614eaea890abc5ebbe473f8703",
-                "reference": "657ee28afa6d5c614eaea890abc5ebbe473f8703",
+                "url": "https://api.github.com/repos/thesis-php/amqp/zipball/169dfa6971de27ca8b1d08f482a1882d16f58c2a",
+                "reference": "169dfa6971de27ca8b1d08f482a1882d16f58c2a",
                 "shasum": ""
             },
             "require": {
@@ -1382,11 +1382,11 @@
                 "thesis/endian": "^0.1.0"
             },
             "require-dev": {
-                "bamarni/composer-bin-plugin": "^1.8",
-                "ergebnis/composer-normalize": "^2.45",
-                "phpunit/phpunit": "^11.5",
-                "symfony/var-dumper": "^7.2"
+                "bamarni/composer-bin-plugin": "^1.8.2",
+                "phpunit/phpunit": "^12.1.4",
+                "symfony/var-dumper": "^6.4.15 || ^7.2.6"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "bamarni-bin": {
@@ -1418,13 +1418,13 @@
                 },
                 {
                     "name": "Thesis Team",
-                    "homepage": "https://github.com/orgs/thesisphp/people"
+                    "homepage": "https://github.com/orgs/thesis-php/people"
                 }
             ],
             "description": "Async (fiber based) client for AMQP 0.9.1",
             "support": {
                 "issues": "https://github.com/thesis-php/amqp/issues",
-                "source": "https://github.com/thesis-php/amqp/tree/0.3.1"
+                "source": "https://github.com/thesis-php/amqp/tree/0.3.x"
             },
             "funding": [
                 {
@@ -1432,7 +1432,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2025-04-14T05:03:10+00:00"
+            "time": "2025-05-06T11:48:01+00:00"
         },
         {
             "name": "thesis/byte-buffer",
@@ -1905,12 +1905,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/thesis-php/message-bus.git",
-                "reference": "c8e38958644355719b5e76a158b148eb4b11ab88"
+                "reference": "25f4a873b8408da3670a2d98453221b84833a1e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thesis-php/message-bus/zipball/c8e38958644355719b5e76a158b148eb4b11ab88",
-                "reference": "c8e38958644355719b5e76a158b148eb4b11ab88",
+                "url": "https://api.github.com/repos/thesis-php/message-bus/zipball/25f4a873b8408da3670a2d98453221b84833a1e0",
+                "reference": "25f4a873b8408da3670a2d98453221b84833a1e0",
                 "shasum": ""
             },
             "require": {
@@ -1928,7 +1928,8 @@
                 "ext-pdo": "*",
                 "phpunit/phpunit": "^12.1.4",
                 "symfony/var-dumper": "^6.4.15 || ^7.2.6",
-                "thesis/amqp": "^0.3.1"
+                "thesis/amqp": "^0.3.1",
+                "thesis/message-bus-transport-amqp": "^0.1@dev"
             },
             "type": "library",
             "extra": {
@@ -1968,7 +1969,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2025-05-06T01:19:55+00:00"
+            "time": "2025-05-06T10:26:59+00:00"
         },
         {
             "name": "thesis/time",
@@ -1976,12 +1977,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/thesis-php/time.git",
-                "reference": "74904f61b49852b8d1189c5da487453fce94304d"
+                "reference": "423be49be070696cbfa17a6547ced4138aab167b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thesis-php/time/zipball/74904f61b49852b8d1189c5da487453fce94304d",
-                "reference": "74904f61b49852b8d1189c5da487453fce94304d",
+                "url": "https://api.github.com/repos/thesis-php/time/zipball/423be49be070696cbfa17a6547ced4138aab167b",
+                "reference": "423be49be070696cbfa17a6547ced4138aab167b",
                 "shasum": ""
             },
             "require": {
@@ -1990,7 +1991,7 @@
             },
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.8.2",
-                "phpunit/phpunit": "^12.1.2"
+                "phpunit/phpunit": "^12.1.4"
             },
             "default-branch": true,
             "type": "library",
@@ -2017,7 +2018,7 @@
                 },
                 {
                     "name": "Thesis Team",
-                    "homepage": "https://github.com/orgs/thesisphp/people"
+                    "homepage": "https://github.com/orgs/thesis-php/people"
                 }
             ],
             "description": "Thesis Time",
@@ -2031,7 +2032,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2025-04-30T13:44:45+00:00"
+            "time": "2025-05-06T02:34:22+00:00"
         },
         {
             "name": "typhoon/describe",
@@ -3918,6 +3919,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "thesis/amqp": 20,
         "thesis/message-bus": 20,
         "thesis/time": 20,
         "typhoon/describe": 20

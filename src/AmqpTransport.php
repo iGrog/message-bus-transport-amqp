@@ -10,8 +10,8 @@ use Thesis\Amqp\Client;
 use Thesis\Amqp\Config;
 use Thesis\Amqp\DeliveryMessage;
 use Thesis\Amqp\PublishMessage;
+use Thesis\Message\Command;
 use Thesis\MessageBus\Envelope;
-use Thesis\MessageBus\Transport\FailedToPublishMessages;
 use Thesis\MessageBus\Transport\Transport;
 use function Amp\async;
 
@@ -83,24 +83,22 @@ final class AmqpTransport implements Transport
         }
 
         $channel = $this->publishChannel;
-        $confirmation = $channel->publishBatch(array_map(
-            function (Envelope $envelope) use ($channel): PublishMessage {
-                $exchange = $this->exchangeNaming->nameExchange($envelope->messageClass);
-                $this->declareExchange($channel, $exchange);
+        $channel
+            ->publishBatch(array_map(
+                function (Envelope $envelope) use ($channel): PublishMessage {
+                    $exchange = $this->exchangeNaming->nameExchange($envelope->messageClass);
+                    $this->declareExchange($channel, $exchange);
 
-                return new PublishMessage(
-                    message: $this->encoder->encodeEnvelope($envelope),
-                    exchange: $exchange,
-                    // todo: handle returns
-                    // mandatory: $envelope->message instanceof Command,
-                );
-            },
-            $envelopes,
-        ));
-
-        if ($confirmation->unconfirmed() !== []) {
-            throw new FailedToPublishMessages();
-        }
+                    return new PublishMessage(
+                        message: $this->encoder->encodeEnvelope($envelope),
+                        exchange: $exchange,
+                        mandatory: $envelope->message instanceof Command,
+                    );
+                },
+                $envelopes,
+            ))
+            ->await()
+            ->ok();
     }
 
     public function consume(string $endpoint, \Closure $handler): \Closure
