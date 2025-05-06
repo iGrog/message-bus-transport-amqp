@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f76c881f889af67910e64e07f285b414",
+    "content-hash": "ce96d3147b50c10aab419844273dda50",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1905,12 +1905,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/thesis-php/message-bus.git",
-                "reference": "25f4a873b8408da3670a2d98453221b84833a1e0"
+                "reference": "81b1199c757960cb0a15c22b4064f27bb1a7473d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thesis-php/message-bus/zipball/25f4a873b8408da3670a2d98453221b84833a1e0",
-                "reference": "25f4a873b8408da3670a2d98453221b84833a1e0",
+                "url": "https://api.github.com/repos/thesis-php/message-bus/zipball/81b1199c757960cb0a15c22b4064f27bb1a7473d",
+                "reference": "81b1199c757960cb0a15c22b4064f27bb1a7473d",
                 "shasum": ""
             },
             "require": {
@@ -1919,7 +1919,8 @@
                 "psr/log": "^3",
                 "thesis/message": "^0.2.1",
                 "thesis/time": "^0.1@dev",
-                "typhoon/describe": "^0.1@dev"
+                "typhoon/describe": "^0.1@dev",
+                "typhoon/formatter": "^0.1@dev"
             },
             "require-dev": {
                 "amphp/postgres": "^2.1.1",
@@ -1928,7 +1929,7 @@
                 "ext-pdo": "*",
                 "phpunit/phpunit": "^12.1.4",
                 "symfony/var-dumper": "^6.4.15 || ^7.2.6",
-                "thesis/amqp": "^0.3.1",
+                "thesis/amqp": "^0.3@dev",
                 "thesis/message-bus-transport-amqp": "^0.1@dev"
             },
             "type": "library",
@@ -1969,7 +1970,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2025-05-06T10:26:59+00:00"
+            "time": "2025-05-06T22:52:22+00:00"
         },
         {
             "name": "thesis/time",
@@ -2040,12 +2041,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/typhoon-php/describe.git",
-                "reference": "e09e2a9253254494d0e96c1949dc682d9fdb0583"
+                "reference": "fea616145d99a95ede4f9f9ca9adb6a3d6af8f8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/typhoon-php/describe/zipball/e09e2a9253254494d0e96c1949dc682d9fdb0583",
-                "reference": "e09e2a9253254494d0e96c1949dc682d9fdb0583",
+                "url": "https://api.github.com/repos/typhoon-php/describe/zipball/fea616145d99a95ede4f9f9ca9adb6a3d6af8f8a",
+                "reference": "fea616145d99a95ede4f9f9ca9adb6a3d6af8f8a",
                 "shasum": ""
             },
             "require": {
@@ -2100,7 +2101,76 @@
                     "type": "custom"
                 }
             ],
-            "time": "2025-03-12T15:46:05+00:00"
+            "abandoned": "typhoon/formatter",
+            "time": "2025-05-06T22:48:20+00:00"
+        },
+        {
+            "name": "typhoon/formatter",
+            "version": "0.1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/typhoon-php/formatter.git",
+                "reference": "8d3206d26ac36588a38445dd55f77764b8493758"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/typhoon-php/formatter/zipball/8d3206d26ac36588a38445dd55f77764b8493758",
+                "reference": "8d3206d26ac36588a38445dd55f77764b8493758",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "bamarni/composer-bin-plugin": "^1.8.2",
+                "phpunit/phpunit": "^10.5.46",
+                "symfony/var-dumper": "^6.4.21 || ^7.2.3"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "bamarni-bin": {
+                    "bin-links": false,
+                    "forward-command": true,
+                    "target-directory": "tools"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/format.php",
+                    "src/formatClass.php",
+                    "src/formatFunction.php",
+                    "src/formatReflectedClass.php",
+                    "src/formatReflectedFunction.php",
+                    "src/formatReflectedType.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Valentin Udaltsov",
+                    "email": "udaltsov.valentin@gmail.com"
+                },
+                {
+                    "name": "Typhoon Team",
+                    "homepage": "https://github.com/orgs/typhoon-php/people"
+                }
+            ],
+            "description": "Typhoon Formatter",
+            "support": {
+                "issues": "https://github.com/typhoon-php/formatter/issues",
+                "source": "https://github.com/typhoon-php/formatter/tree/0.1.x"
+            },
+            "funding": [
+                {
+                    "url": "https://www.tinkoff.ru/cf/5MqZQas2dk7",
+                    "type": "custom"
+                }
+            ],
+            "time": "2025-05-06T22:44:52+00:00"
         }
     ],
     "packages-dev": [
@@ -3922,7 +3992,8 @@
         "thesis/amqp": 20,
         "thesis/message-bus": 20,
         "thesis/time": 20,
-        "typhoon/describe": 20
+        "typhoon/describe": 20,
+        "typhoon/formatter": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
