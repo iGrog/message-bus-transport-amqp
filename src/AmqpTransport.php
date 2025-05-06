@@ -7,7 +7,6 @@ namespace Thesis\MessageBus\Transport\Amqp;
 use Amp\Future;
 use Thesis\Amqp\Channel;
 use Thesis\Amqp\Client;
-use Thesis\Amqp\Config;
 use Thesis\Amqp\DeliveryMessage;
 use Thesis\Amqp\PublishMessage;
 use Thesis\Message\Command;
@@ -28,15 +27,14 @@ final class AmqpTransport implements Transport
     private ?Channel $publishChannel = null;
 
     public function __construct(
-        private readonly Config $config,
+        private readonly Client $client,
         private readonly ExchangeNaming $exchangeNaming = new MessageClassBasedExchangeNaming(),
         private readonly AmqpEnvelopeEncoder $encoder = new DefaultAmqpEnvelopeEncoder(),
     ) {}
 
     public function setup(string $endpoint, array $localMessages): void
     {
-        $client = new Client($this->config);
-        $channel = $client->channel();
+        $channel = $this->client->channel();
         $channel->queueDeclare($endpoint, durable: true);
 
         foreach ($localMessages as $localMessage) {
@@ -46,7 +44,6 @@ final class AmqpTransport implements Transport
         }
 
         $channel->close();
-        $client->disconnect();
     }
 
     /**
@@ -69,7 +66,7 @@ final class AmqpTransport implements Transport
     {
         if ($this->publishChannel === null || $this->publishChannel->isClosed()) {
             $this->publishChannelFuture ??= async(function (): Channel {
-                $channel = new Client($this->config)->channel();
+                $channel = $this->client->channel();
                 $channel->confirmSelect();
 
                 return $channel;
@@ -103,7 +100,7 @@ final class AmqpTransport implements Transport
 
     public function consume(string $endpoint, \Closure $handler): \Closure
     {
-        $client = new Client($this->config);
+        $client = new Client($this->client->config);
         $channel = $client->channel();
         $channel->qos(prefetchCount: 1);
 
