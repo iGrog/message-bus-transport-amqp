@@ -1,6 +1,6 @@
 {
-    "name": "thesis/template",
-    "description": "Thesis Template",
+    "name": "thesis/message-bus-transport-amqp",
+    "description": "Amqp transport for thesis/message-bus",
     "license": "MIT",
     "type": "library",
     "authors": [
@@ -14,7 +14,12 @@
         }
     ],
     "require": {
-        "php": "^8.3"
+        "php": "^8.4",
+        "amphp/amp": "^3",
+        "thesis/amqp": "^0.3",
+        "thesis/message-bus": "^0.3@dev",
+        "thesis/time": "^0.1@dev",
+        "typhoon/describe": "^0.1@dev"
     },
     "require-dev": {
         "bamarni/composer-bin-plugin": "^1.8.2",
@@ -23,12 +28,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Thesis\\Template\\": "src/"
+            "Thesis\\MessageBus\\Transport\\Amqp\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Thesis\\Template\\": "tests/"
+            "Thesis\\MessageBus\\Transport\\Amqp\\": "tests/"
         }
     },
     "config": {
@@ -37,7 +42,7 @@
         },
         "bump-after-update": "dev",
         "platform": {
-            "php": "8.3.17"
+            "php": "8.4.4"
         },
         "sort-packages": true
     },
@@ -50,7 +55,7 @@
     },
     "scripts": {
         "analyse-deps": "tools/composer-dependency-analyser/vendor/bin/composer-dependency-analyser",
-        "fixcs": "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --diff --verbose",
+        "fixcs": "PHP_CS_FIXER_IGNORE_ENV=1 tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --diff --verbose",
         "infection": "tools/infection/vendor/bin/infection --show-mutations",
         "normalize": "@composer bin composer-normalize normalize --diff ../../composer.json",
         "phpstan": "tools/phpstan/vendor/bin/phpstan analyze",
