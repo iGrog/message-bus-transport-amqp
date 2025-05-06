@@ -16,7 +16,7 @@
     "require": {
         "php": "^8.4",
         "amphp/amp": "^3",
-        "thesis/amqp": "^0.3@dev",
+        "thesis/amqp": "^0.4@dev",
         "thesis/message-bus": "^0.3@dev",
         "thesis/time": "^0.1@dev",
         "typhoon/describe": "^0.1@dev"

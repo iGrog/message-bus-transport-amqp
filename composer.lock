@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e447196e4b265b01d9e8955b1b1f5842",
+    "content-hash": "f76c881f889af67910e64e07f285b414",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1354,16 +1354,16 @@
         },
         {
             "name": "thesis/amqp",
-            "version": "0.3.x-dev",
+            "version": "0.4.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thesis-php/amqp.git",
-                "reference": "3a427039c1ede2087fbb50d9c0faad8f234b9240"
+                "reference": "28016cc8e3fda3da6d73869dc52e083e2b395840"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thesis-php/amqp/zipball/3a427039c1ede2087fbb50d9c0faad8f234b9240",
-                "reference": "3a427039c1ede2087fbb50d9c0faad8f234b9240",
+                "url": "https://api.github.com/repos/thesis-php/amqp/zipball/28016cc8e3fda3da6d73869dc52e083e2b395840",
+                "reference": "28016cc8e3fda3da6d73869dc52e083e2b395840",
                 "shasum": ""
             },
             "require": {
@@ -1424,7 +1424,7 @@
             "description": "Async (fiber based) client for AMQP 0.9.1",
             "support": {
                 "issues": "https://github.com/thesis-php/amqp/issues",
-                "source": "https://github.com/thesis-php/amqp/tree/0.3.x"
+                "source": "https://github.com/thesis-php/amqp/tree/0.4.x"
             },
             "funding": [
                 {
@@ -1432,7 +1432,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2025-05-06T13:31:24+00:00"
+            "time": "2025-05-06T16:01:14+00:00"
         },
         {
             "name": "thesis/byte-buffer",
