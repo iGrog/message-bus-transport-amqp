@@ -1358,12 +1358,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/thesis-php/amqp.git",
-                "reference": "169dfa6971de27ca8b1d08f482a1882d16f58c2a"
+                "reference": "3a427039c1ede2087fbb50d9c0faad8f234b9240"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thesis-php/amqp/zipball/169dfa6971de27ca8b1d08f482a1882d16f58c2a",
-                "reference": "169dfa6971de27ca8b1d08f482a1882d16f58c2a",
+                "url": "https://api.github.com/repos/thesis-php/amqp/zipball/3a427039c1ede2087fbb50d9c0faad8f234b9240",
+                "reference": "3a427039c1ede2087fbb50d9c0faad8f234b9240",
                 "shasum": ""
             },
             "require": {
@@ -1432,7 +1432,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2025-05-06T11:48:01+00:00"
+            "time": "2025-05-06T13:31:24+00:00"
         },
         {
             "name": "thesis/byte-buffer",

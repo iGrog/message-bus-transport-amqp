@@ -98,7 +98,7 @@ final class AmqpTransport implements Transport
                 $envelopes,
             ))
             ->await()
-            ->ok();
+            ->ensureAllPublished();
     }
 
     public function consume(string $endpoint, \Closure $handler): \Closure
