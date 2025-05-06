@@ -25,7 +25,6 @@
         "bamarni/composer-bin-plugin": "^1.8.2",
         "phpunit/phpunit": "^12.1.4",
         "symfony/var-dumper": "^6.4.15 || ^7.2.6",
-        "typhoon/describe": "^0.1@dev",
         "typhoon/formatter": "^0.1@dev"
     },
     "autoload": {
