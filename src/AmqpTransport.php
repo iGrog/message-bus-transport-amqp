@@ -29,7 +29,7 @@ final class AmqpTransport implements Transport
 
     public function __construct(
         private readonly Config $config,
-        private readonly ExchangeNaming $exchangeNaming = new MessageClassExchangeNaming(),
+        private readonly ExchangeNaming $exchangeNaming = new MessageClassBasedExchangeNaming(),
         private readonly AmqpEnvelopeEncoder $encoder = new DefaultAmqpEnvelopeEncoder(),
     ) {}
 

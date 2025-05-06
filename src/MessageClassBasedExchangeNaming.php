@@ -7,7 +7,7 @@ namespace Thesis\MessageBus\Transport\Amqp;
 /**
  * @api
  */
-final readonly class MessageClassExchangeNaming implements ExchangeNaming
+final readonly class MessageClassBasedExchangeNaming implements ExchangeNaming
 {
     public function __construct(
         private string $namespaceSeparator = '.',
