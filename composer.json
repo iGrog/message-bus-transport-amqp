@@ -19,6 +19,7 @@
         "thesis/amqp": "^0.4@dev",
         "thesis/message": "^0.2.1",
         "thesis/message-bus": "^0.3@dev",
+        "thesis/sync-once": "^0.1.0",
         "thesis/time": "^0.1@dev"
     },
     "require-dev": {

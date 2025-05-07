@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Thesis\MessageBus\Transport\Amqp;
 
-use Amp\Future;
 use Thesis\Amqp\Channel;
 use Thesis\Amqp\Client;
 use Thesis\Amqp\DeliveryMessage;
@@ -12,7 +11,7 @@ use Thesis\Amqp\PublishMessage;
 use Thesis\Message\Command;
 use Thesis\MessageBus\Envelope;
 use Thesis\MessageBus\Transport\Transport;
-use function Amp\async;
+use Thesis\Sync\Once;
 
 /**
  * @api
@@ -20,17 +19,25 @@ use function Amp\async;
 final class AmqpTransport implements Transport
 {
     /**
-     * @var ?Future<Channel>
+     * @var Once<Channel>
      */
-    private ?Future $publishChannelFuture = null;
-
-    private ?Channel $publishChannel = null;
+    private readonly Once $publishChannel;
 
     public function __construct(
         private readonly Client $client,
         private readonly ExchangeNaming $exchangeNaming = new MessageClassBasedExchangeNaming(),
         private readonly AmqpEnvelopeEncoder $encoder = new DefaultAmqpEnvelopeEncoder(),
-    ) {}
+    ) {
+        $this->publishChannel = new Once(
+            function: static function () use ($client): Channel {
+                $channel = $client->channel();
+                $channel->confirmSelect();
+
+                return $channel;
+            },
+            isAlive: static fn(Channel $channel): bool => !$channel->isClosed(),
+        );
+    }
 
     public function setup(string $endpoint, array $localMessages): void
     {
@@ -46,45 +53,15 @@ final class AmqpTransport implements Transport
         $channel->close();
     }
 
-    /**
-     * @var array<non-empty-string, true>
-     */
-    private array $declaredExchanges = [];
-
-    /**
-     * @param non-empty-string $exchange
-     */
-    private function declareExchange(Channel $channel, string $exchange): void
-    {
-        if (!isset($this->declaredExchanges[$exchange])) {
-            $channel->exchangeDeclare($exchange, exchangeType: 'fanout', durable: true);
-            $this->declaredExchanges[$exchange] = true;
-        }
-    }
-
     public function publish(array $envelopes): void
     {
-        if ($this->publishChannel === null || $this->publishChannel->isClosed()) {
-            $this->publishChannelFuture ??= async(function (): Channel {
-                $channel = $this->client->channel();
-                $channel->confirmSelect();
-
-                return $channel;
-            });
-
-            try {
-                $this->publishChannel = $this->publishChannelFuture->await();
-            } finally {
-                $this->publishChannelFuture = null;
-            }
-        }
-
-        $channel = $this->publishChannel;
-        $channel
+        $this
+            ->publishChannel
+            ->await()
             ->publishBatch(array_map(
-                function (Envelope $envelope) use ($channel): PublishMessage {
+                function (Envelope $envelope): PublishMessage {
                     $exchange = $this->exchangeNaming->nameExchange($envelope->messageClass);
-                    $this->declareExchange($channel, $exchange);
+                    $this->declareExchange($this->publishChannel->await(), $exchange);
 
                     return new PublishMessage(
                         message: $this->encoder->encodeEnvelope($envelope),
@@ -117,5 +94,23 @@ final class AmqpTransport implements Transport
             $channel->close();
             $client->disconnect();
         };
+    }
+
+    /**
+     * @var array<non-empty-string, Once<void>>
+     */
+    private array $declaredExchanges = [];
+
+    /**
+     * @param non-empty-string $exchange
+     */
+    private function declareExchange(Channel $channel, string $exchange): void
+    {
+        $this->declaredExchanges[$exchange] ??= new Once(
+            static function () use ($channel, $exchange): void {
+                $channel->exchangeDeclare($exchange, exchangeType: 'fanout', durable: true);
+            },
+        );
+        $this->declaredExchanges[$exchange]->await();
     }
 }
