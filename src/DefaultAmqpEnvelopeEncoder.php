@@ -28,8 +28,9 @@ use Thesis\Time\TimeSpan;
 final readonly class DefaultAmqpEnvelopeEncoder implements AmqpEnvelopeEncoder
 {
     public const array DEFAULT_STAMP_HEADERS = [
-        CauseId::class => 'x-cause-id',
-        SourceEndpoint::class => 'x-source-endpoint',
+        CorrelationId::class => 'thesis-message-bus-correlation-id',
+        CauseId::class => 'thesis-message-bus-cause-id',
+        SourceEndpoint::class => 'thesis-message-bus-source-endpoint',
     ];
 
     /**
@@ -53,7 +54,6 @@ final readonly class DefaultAmqpEnvelopeEncoder implements AmqpEnvelopeEncoder
                 $envelope
                     ->withoutStamps([
                         MessageId::class,
-                        CorrelationId::class,
                         Timestamp::class,
                         AmqpDeliveryMode::class,
                         AmqpPriority::class,
@@ -66,7 +66,6 @@ final readonly class DefaultAmqpEnvelopeEncoder implements AmqpEnvelopeEncoder
             contentEncoding: $encodedData->encoding,
             deliveryMode: $envelope->findStamp(AmqpDeliveryMode::class)->deliveryMode ?? DeliveryMode::Persistent,
             priority: $envelope->findStamp(AmqpPriority::class)?->priority,
-            correlationId: $envelope->findStamp(CorrelationId::class)?->correlationId,
             expiration: $expiration === null ? null : (string) $expiration->expiration->toMilliseconds(),
             messageId: $envelope->findStamp(MessageId::class)?->messageId,
             timestamp: $envelope->findStamp(Timestamp::class)?->timestamp,
@@ -101,10 +100,6 @@ final readonly class DefaultAmqpEnvelopeEncoder implements AmqpEnvelopeEncoder
 
         if ($message->messageId !== null && $message->messageId !== '') {
             $stamps[] = new MessageId($message->messageId);
-        }
-
-        if ($message->correlationId !== null && $message->correlationId !== '') {
-            $stamps[] = new CorrelationId($message->correlationId);
         }
 
         if ($message->timestamp !== null) {
