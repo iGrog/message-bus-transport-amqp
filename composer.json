@@ -15,7 +15,7 @@
     ],
     "require": {
         "php": "^8.4",
-        "thesis/amqp": "^0.4@dev",
+        "thesis/amqp": "^1@dev",
         "thesis/message": "^0.2.1",
         "thesis/message-bus": "^0.4@dev",
         "thesis/sync-once": "^0.1.0",
